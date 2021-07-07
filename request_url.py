@@ -8,7 +8,7 @@ class REQUESTX:
     def transmit(self, freq, status):
         
         msg = {"STATUS":status,"FREQ":freq}
-        print(msg)
+        #print(msg)
         r = requests.post('http://10.8.2.15/atualiza/freq', json=msg)
         r.status_code
         return r.text

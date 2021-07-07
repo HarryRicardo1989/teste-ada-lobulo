@@ -15,7 +15,7 @@ class TesteAda:
         self.signal_power = 0.0
         pass
 
-    def ada_teste(self, pos_az_init,pos_az_end,pos_el_init,pos_el_end,media_num,frequencia_init,frequencia_end,timer,TX_power,NomeArquivo):
+    def ada_teste(self, pos_az_init,pos_az_end,pos_el_init,pos_el_end,media_num,frequencia_init,frequencia_end,timer,NomeArquivo):
         self.pos_az_init = pos_az_init
         self.pos_az_end = pos_az_end
         self.pos_el_init = pos_el_init
@@ -24,14 +24,13 @@ class TesteAda:
         self.frequencia_init = int(frequencia_init * 10)
         self.frequencia_end =  int(frequencia_end *10)
         self.tempo_espera = timer
-        self.TX_power = TX_power
         self.NomeArquivo = NomeArquivo
         self.URL.transmit(140, "ON")
 
 
         for pos_el in range(int(self.pos_el_init), int(self.pos_el_end)+1, 1):
             for freq in range(int(self.frequencia_init), int(self.frequencia_end)+1,1):
-                print(freq, self.frequencia_init, self.frequencia_end)
+                #print(freq, self.frequencia_init, self.frequencia_end)
                 frequencia = freq /10
                 for pos_az in range(int(self.pos_az_init), int(self.pos_az_end)+1, 1):
                     self.URL.transmit(frequencia, "ON")
@@ -62,7 +61,7 @@ class TesteAda:
     def grava_resultado(self, pos_az, pos_el, freq, signal_power):
         with open(f'./teste-ADA-{self.NomeArquivo}.csv', 'a') as file:
             file.write(
-                f'Frequencia = {freq} MHz |TX = {self.TX_power}dBm |Azimute = {pos_az}|Elevacao = {pos_el}|{signal_power} dBFS \n')
+                f'Frequencia = {freq} MHz |Azimute = {pos_az}|Elevacao = {pos_el}|{signal_power} dBFS \n')
 
 
 if __name__ == '__main__':
@@ -77,10 +76,9 @@ if __name__ == '__main__':
     frequencia_init = float(input("Digite frequencia Inicial desejada: "))
     frequencia_end  = float(input("Digite frequencia Final desejada: "))
     timer = int(input("Digite tempode espera entre coletas: "))
-    TX_power = float(input("Digite potencia de transmicao do sinal em dBm: "))
     NomeArquivo = str(input("Digite o Sufixo do arquivo: "))  
 
-    TesteAda().ada_teste(pos_az_init,pos_az_end,pos_el_init,pos_el_end,media_num,frequencia_init,frequencia_end,timer,TX_power,NomeArquivo)
+    TesteAda().ada_teste(pos_az_init,pos_az_end,pos_el_init,pos_el_end,media_num,frequencia_init,frequencia_end,timer,NomeArquivo)
 #    TesteAda().ada_teste(6.00, 6.00, 0.00, 20, frequencia, 5, -40)
 
 #pos_az_init,pos_az_end,pos_el_init,pos_el_end,media_num,frequencia_init,frequencia_end,timer,TX_power,NomeArquivo
