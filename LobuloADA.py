@@ -32,8 +32,8 @@ class TesteAda:
             for freq in range(int(self.frequencia_init), int(self.frequencia_end)+1,1):
                 #print(freq, self.frequencia_init, self.frequencia_end)
                 frequencia = freq /10
+                self.URL.transmit(frequencia, "ON")
                 for pos_az in range(int(self.pos_az_init), int(self.pos_az_end)+1, 1):
-                    self.URL.transmit(frequencia, "ON")
                     print(
                         f'Azimute = {pos_az} graus. Elevacao {pos_el} freq {frequencia}')
                     self.ada_ctr.set_ada_pos(float(pos_az), pos_el)
