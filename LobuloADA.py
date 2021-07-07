@@ -68,17 +68,7 @@ class TesteAda:
 if __name__ == '__main__':
     
     print("Inicio Teste Lobulo de irradiacao: ")
-    '''     pos_az_init = 0
-    pos_az_end = 360
-    pos_el_init = 0
-    pos_el_end = 0
-    media_num = 10
-    frequencia_init = 145
-    frequencia_end = 145
-    timer = 5
-    TX_power = 0
-    NomeArquivo = "teste" '''
-    
+  
     pos_az_init = float(input("Digite a posicao de azimute Inicial: "))
     pos_az_end = float(input("Digite a posicao de azimute Final: "))
     pos_el_init = float(input("Digite a posiçao de elevacao Inicial: "))
@@ -89,10 +79,6 @@ if __name__ == '__main__':
     timer = int(input("Digite tempode espera entre coletas: "))
     TX_power = float(input("Digite potencia de transmicao do sinal em dBm: "))
     NomeArquivo = str(input("Digite o Sufixo do arquivo: "))  
-    
-    
-
-    print("Inicio Teste Lobulo de irradiacao: ")
 
     TesteAda().ada_teste(pos_az_init,pos_az_end,pos_el_init,pos_el_end,media_num,frequencia_init,frequencia_end,timer,TX_power,NomeArquivo)
 #    TesteAda().ada_teste(6.00, 6.00, 0.00, 20, frequencia, 5, -40)
