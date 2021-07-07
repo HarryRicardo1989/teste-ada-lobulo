@@ -1,4 +1,2 @@
 __pycache__/
 *.csv  
-
-git config --global user.email "ricardopaschoali@gmail.com" ; git config --global user.name "Ricardo Paschoali"
