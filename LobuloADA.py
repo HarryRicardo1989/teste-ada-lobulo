@@ -29,7 +29,7 @@ class TesteAda:
 
 
         for pos_el in range(int(self.pos_el_init), int(self.pos_el_end)+1, 1):
-            for freq in range(int(self.frequencia_init), int(self.frequencia_end)+1,1):
+            for freq in range(int(self.frequencia_init), int(self.frequencia_end)+1,10):
                 #print(freq, self.frequencia_init, self.frequencia_end)
                 frequencia = freq /10
                 self.URL.transmit(frequencia, "ON")
@@ -38,24 +38,22 @@ class TesteAda:
                         f'Azimute = {pos_az} graus. Elevacao {pos_el} freq {frequencia}')
                     self.ada_ctr.set_ada_pos(float(pos_az), pos_el)
                     sleep(self.tempo_espera)
+                    
                     self.grava_resultado(
                         pos_az, pos_el, frequencia, self.gqrx(media_num, frequencia))
         print('finalizado')
         self.URL.transmit(140, "OFF")
 
     def gqrx(self, media_num, freq):
-
-        sleep(0.3)
         self.gqrx_ctr.set_controls(ac.set_freq, f'{freq}e6')
         self.gqrx_ctr.get_status(ac.signal_power)
         signal_power = 0
-        sleep(0.3)
         signal_list = []
         for teste in range(0, media_num):
             signal_power = float(self.gqrx_ctr.get_status(ac.signal_power))
             signal_list.append(signal_power)
             print(f'{teste+1} Signal Power {signal_power} dBFS')
-            sleep(0.5)
+            sleep(0.1)
         return round(sum(signal_list) / len(signal_list),2)
 
     def grava_resultado(self, pos_az, pos_el, freq, signal_power):
