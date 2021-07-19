@@ -15,7 +15,7 @@ class TesteAda:
         self.signal_power = 0.0
         pass
 
-    def ada_teste(self, pos_az_init,pos_az_end,pos_el_init,pos_el_end,media_num,frequencia_init,frequencia_end,timer,NomeArquivo):
+    def ada_teste(self, pos_az_init, pos_az_end, pos_el_init, pos_el_end, media_num, frequencia_init, frequencia_end, timer, NomeArquivo, incremento):
         self.pos_az_init = pos_az_init
         self.pos_az_end = pos_az_end
         self.pos_el_init = pos_el_init
@@ -26,10 +26,11 @@ class TesteAda:
         self.tempo_espera = timer
         self.NomeArquivo = NomeArquivo
         self.URL.transmit(frequencia_init, "ON")
+        self.incremento = incremento *10
 
 
         for pos_el in range(int(self.pos_el_init), int(self.pos_el_end)+1, 1):
-            for freq in range(int(self.frequencia_init), int(self.frequencia_end)+1,1):
+            for freq in range(int(self.frequencia_init), int(self.frequencia_end)+1, incremento):
                 #print(freq, self.frequencia_init, self.frequencia_end)
                 self.ada_ctr.set_ada_pos(float(self.pos_az_init), float(self.pos_el_init))
                 sleep (20)
@@ -73,17 +74,19 @@ if __name__ == '__main__':
     pos_az_end = float(input("Digite a posicao de azimute Final: "))
     pos_el_init = float(input("Digite a posiçao de elevacao Inicial: "))
     pos_el_end = float(input("Digite a posiçao de elevacao Final: "))
-    media_num = int(input("Digite a quantidade de coletas para media: "))
     frequencia_init = float(input("Digite frequencia Inicial desejada: "))
-    frequencia_end  = float(input("Digite frequencia Final desejada: "))
+    frequencia_end = float(input("Digite frequencia Final desejada: "))
+    incremento = float(input("Digite o incremento de frequencia em MHz: "))
+    media_num = int(input("Digite a quantidade de coletas para media: "))
     timer = int(input("Digite tempo de espera entre coletas: "))
-    NomeArquivo = str(input("Digite o Nome do arquivo: "))  
+    NomeArquivo = str(input("Digite o Nome do arquivo: "))
     voltas = int(input("Digite a quantidade de repetições do teste : "))-1
 
 #    for teste in voltas:
 #        print(f'teste {teste}')
     for teste in range(0, voltas, 1):
-        TesteAda().ada_teste(pos_az_init,pos_az_end,pos_el_init,pos_el_end,media_num,frequencia_init,frequencia_end,timer,NomeArquivo)
+        TesteAda().ada_teste(pos_az_init, pos_az_end, pos_el_init, pos_el_end,
+                             media_num, frequencia_init, frequencia_end, timer, NomeArquivo, incremento)
 
 #    TesteAda().ada_teste(6.00, 6.00, 0.00, 20, frequencia, 5, -40)
 
