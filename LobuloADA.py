@@ -25,14 +25,17 @@ class TesteAda:
         self.frequencia_end =  int(frequencia_end *10)
         self.tempo_espera = timer
         self.NomeArquivo = NomeArquivo
-        self.URL.transmit(140, "ON")
+        self.URL.transmit(frequencia_init, "ON")
 
 
         for pos_el in range(int(self.pos_el_init), int(self.pos_el_end)+1, 1):
-            for freq in range(int(self.frequencia_init), int(self.frequencia_end)+1,10):
+            for freq in range(int(self.frequencia_init), int(self.frequencia_end)+1,1):
                 #print(freq, self.frequencia_init, self.frequencia_end)
+                self.ada_ctr.set_ada_pos(float(self.pos_az_init), float(self.pos_el_init))
+                sleep (20)
                 frequencia = freq /10
                 self.URL.transmit(frequencia, "ON")
+                sleep(10)
                 for pos_az in range(int(self.pos_az_init), int(self.pos_az_end)+1, 1):
                     print(
                         f'Azimute = {pos_az} graus. Elevacao {pos_el} freq {frequencia}')
@@ -53,11 +56,11 @@ class TesteAda:
             signal_power = float(self.gqrx_ctr.get_status(ac.signal_power))
             signal_list.append(signal_power)
             print(f'{teste+1} Signal Power {signal_power} dBFS')
-            sleep(0.1)
+            sleep(0.2)
         return round(sum(signal_list) / len(signal_list),2)
 
     def grava_resultado(self, pos_az, pos_el, freq, signal_power):
-        with open(f'./teste-ADA-{self.NomeArquivo}.csv', 'a') as file:
+        with open(f'./{self.NomeArquivo}.csv', 'a') as file:
             file.write(
                 f'Frequencia = {freq} MHz |Azimute = {pos_az}|Elevacao = {pos_el}|{signal_power} dBFS \n')
 
@@ -73,10 +76,14 @@ if __name__ == '__main__':
     media_num = int(input("Digite a quantidade de coletas para media: "))
     frequencia_init = float(input("Digite frequencia Inicial desejada: "))
     frequencia_end  = float(input("Digite frequencia Final desejada: "))
-    timer = int(input("Digite tempode espera entre coletas: "))
+    timer = int(input("Digite tempo de espera entre coletas: "))
     NomeArquivo = str(input("Digite o Sufixo do arquivo: "))  
+    voltas = int(input("Digite a quantidade de repetições do teste : "))-1
 
+#    for teste in voltas:
+#        print(f'teste {teste}')
     TesteAda().ada_teste(pos_az_init,pos_az_end,pos_el_init,pos_el_end,media_num,frequencia_init,frequencia_end,timer,NomeArquivo)
+
 #    TesteAda().ada_teste(6.00, 6.00, 0.00, 20, frequencia, 5, -40)
 
 #pos_az_init,pos_az_end,pos_el_init,pos_el_end,media_num,frequencia_init,frequencia_end,timer,TX_power,NomeArquivo
