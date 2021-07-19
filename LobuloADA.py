@@ -60,7 +60,7 @@ class TesteAda:
         return round(sum(signal_list) / len(signal_list),2)
 
     def grava_resultado(self, pos_az, pos_el, freq, signal_power):
-        with open(f'./{self.NomeArquivo}.csv', 'a') as file:
+        with open(f'./Resultados/{self.NomeArquivo}.csv', 'a') as file:
             file.write(
                 f'Frequencia = {freq} MHz |Azimute = {pos_az}|Elevacao = {pos_el}|{signal_power} dBFS \n')
 
@@ -77,12 +77,13 @@ if __name__ == '__main__':
     frequencia_init = float(input("Digite frequencia Inicial desejada: "))
     frequencia_end  = float(input("Digite frequencia Final desejada: "))
     timer = int(input("Digite tempo de espera entre coletas: "))
-    NomeArquivo = str(input("Digite o Sufixo do arquivo: "))  
+    NomeArquivo = str(input("Digite o Nome do arquivo: "))  
     voltas = int(input("Digite a quantidade de repetições do teste : "))-1
 
 #    for teste in voltas:
 #        print(f'teste {teste}')
-    TesteAda().ada_teste(pos_az_init,pos_az_end,pos_el_init,pos_el_end,media_num,frequencia_init,frequencia_end,timer,NomeArquivo)
+    for teste in range(0, voltas, 1):
+        TesteAda().ada_teste(pos_az_init,pos_az_end,pos_el_init,pos_el_end,media_num,frequencia_init,frequencia_end,timer,NomeArquivo)
 
 #    TesteAda().ada_teste(6.00, 6.00, 0.00, 20, frequencia, 5, -40)
 
