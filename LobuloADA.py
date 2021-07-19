@@ -80,7 +80,7 @@ if __name__ == '__main__':
     media_num = int(input("Digite a quantidade de coletas para media: "))
     timer = int(input("Digite tempo de espera entre coletas: "))
     NomeArquivo = str(input("Digite o Nome do arquivo: "))
-    voltas = int(input("Digite a quantidade de repetições do teste : "))
+    voltas = int(input("Digite a quantidade de vezes que o teste será executado: "))
 
 #    for teste in voltas:
 #        print(f'teste {teste}')
