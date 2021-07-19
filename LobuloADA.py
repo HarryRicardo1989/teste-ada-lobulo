@@ -61,7 +61,7 @@ class TesteAda:
         return round(sum(signal_list) / len(signal_list),2)
 
     def grava_resultado(self, pos_az, pos_el, freq, signal_power):
-        with open(f'./Resultados/{self.NomeArquivo}.csv', 'a') as file:
+        with open(f'/var/log/Resultados/{self.NomeArquivo}.csv', 'a') as file:
             file.write(
                 f'Frequencia = {freq} MHz |Azimute = {pos_az}|Elevacao = {pos_el}|{signal_power} dBFS \n')
 
