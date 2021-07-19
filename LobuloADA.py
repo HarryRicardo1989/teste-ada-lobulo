@@ -26,11 +26,11 @@ class TesteAda:
         self.tempo_espera = timer
         self.NomeArquivo = NomeArquivo
         self.URL.transmit(frequencia_init, "ON")
-        self.incremento = incremento *10
+        self.incremento = int(incremento *10)
 
 
         for pos_el in range(int(self.pos_el_init), int(self.pos_el_end)+1, 1):
-            for freq in range(int(self.frequencia_init), int(self.frequencia_end)+1, incremento):
+            for freq in range(int(self.frequencia_init), int(self.frequencia_end)+1, self.incremento):
                 #print(freq, self.frequencia_init, self.frequencia_end)
                 self.ada_ctr.set_ada_pos(float(self.pos_az_init), float(self.pos_el_init))
                 sleep (20)
