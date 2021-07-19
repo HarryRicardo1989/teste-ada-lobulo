@@ -80,11 +80,12 @@ if __name__ == '__main__':
     media_num = int(input("Digite a quantidade de coletas para media: "))
     timer = int(input("Digite tempo de espera entre coletas: "))
     NomeArquivo = str(input("Digite o Nome do arquivo: "))
-    voltas = int(input("Digite a quantidade de repetições do teste : "))-1
+    voltas = int(input("Digite a quantidade de repetições do teste : "))
 
 #    for teste in voltas:
 #        print(f'teste {teste}')
-    for teste in range(0, voltas, 1):
+    for teste in range(voltas):
+        print(f'Teste numero {teste + 1}')
         TesteAda().ada_teste(pos_az_init, pos_az_end, pos_el_init, pos_el_end,
                              media_num, frequencia_init, frequencia_end, timer, NomeArquivo, incremento)
 
