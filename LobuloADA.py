@@ -84,10 +84,13 @@ class TesteAda:
 
         tempo_total = (quantAZ * quantEL * quantFreq * tempo_coletas * timer * voltas)/3600
         quantidade_linhas = (quantAZ * quantEL * quantFreq * voltas)
-        print(f'O tempo estimado do Teste é de {tempo_total} horas.\n')
+        tempo_por_linhas = (quantAZ * quantEL * quantFreq *
+                            tempo_coletas * timer * voltas) / quantidade_linhas
+        print(f'\nO tempo estimado do Teste é de {tempo_total} horas.\n')
+        print(f'O teste registrará uma linha a cada {tempo_por_linhas} segundos.\n')
         print(f'O arquivo ficará com {quantidade_linhas} linhas.\n')
         
-        if input("Digite y para continuar n para alterar os parametros: ") == "y":
+        if input("Digite 'y' para continuar 'n' para alterar os parametros: ") == "y":
             for teste in range(voltas):
                 print(f'Teste numero {teste + 1}')
                 TesteAda().ada_teste(pos_az_init, pos_az_end, pos_el_init, pos_el_end,
