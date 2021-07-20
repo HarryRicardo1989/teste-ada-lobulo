@@ -83,8 +83,9 @@ class TesteAda:
         tempo_coletas = media_num * 0.2
 
         tempo_total = (quantAZ * quantEL * quantFreq * tempo_coletas * timer * voltas)/3600
-        
+        quantidade_linhas = (quantAZ * quantEL * quantFreq * voltas)
         print(f'O tempo estimado do Teste é de {tempo_total} horas.\n')
+        print(f'O arquivo ficará com {quantidade_linhas} linhas.\n')
         
         if input("Digite y para continuar n para alterar os parametros: ") == "y":
             for teste in range(voltas):
