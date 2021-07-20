@@ -63,29 +63,45 @@ class TesteAda:
             file.write(
                 f'Frequencia = {freq} MHz |Azimute = {pos_az}|Elevacao = {pos_el}|{signal_power} dBFS \n')
 
+    def Inicio(self):
+
+        pos_az_init = float(input("Digite a posicao de azimute Inicial: "))
+        pos_az_end = float(input("Digite a posicao de azimute Final: "))
+        pos_el_init = float(input("Digite a posiçao de elevacao Inicial: "))
+        pos_el_end = float(input("Digite a posiçao de elevacao Final: "))
+        frequencia_init = float(input("Digite frequencia Inicial desejada: "))
+        frequencia_end = float(input("Digite frequencia Final desejada: "))
+        incremento = float(input("Digite o incremento de frequencia em MHz: "))
+        media_num = int(input("Digite a quantidade de coletas para media: "))
+        timer = int(input("Digite tempo de espera entre coletas: "))
+        NomeArquivo = str(input("Digite o Nome do arquivo: "))
+        voltas = int(input("Digite a quantidade de vezes que o teste será executado: "))
+
+        quantAZ = pos_az_end - pos_az_init +1
+        quantEL = pos_el_end - pos_el_init +1
+        quantFreq = ((frequencia_end - frequencia_init) / incremento) +1
+        tempo_coletas = media_num * 0.2
+
+        tempo_total = (quantAZ * quantEL * quantFreq * tempo_coletas * timer * voltas)/3600
+        
+        print(f'O tempo estimado do Teste é de {tempo_total} horas.\n')
+        
+        if input("Digite y para continuar n para alterar os parametros: ") == "y":
+            for teste in range(voltas):
+                print(f'Teste numero {teste + 1}')
+                TesteAda().ada_teste(pos_az_init, pos_az_end, pos_el_init, pos_el_end,
+                             media_num, frequencia_init, frequencia_end, timer, NomeArquivo, incremento)
+        else:
+            self.Inicio()
 
 if __name__ == '__main__':
     
     print("Inicio Teste Lobulo de irradiacao: ")
   
-    pos_az_init = float(input("Digite a posicao de azimute Inicial: "))
-    pos_az_end = float(input("Digite a posicao de azimute Final: "))
-    pos_el_init = float(input("Digite a posiçao de elevacao Inicial: "))
-    pos_el_end = float(input("Digite a posiçao de elevacao Final: "))
-    frequencia_init = float(input("Digite frequencia Inicial desejada: "))
-    frequencia_end = float(input("Digite frequencia Final desejada: "))
-    incremento = float(input("Digite o incremento de frequencia em MHz: "))
-    media_num = int(input("Digite a quantidade de coletas para media: "))
-    timer = int(input("Digite tempo de espera entre coletas: "))
-    NomeArquivo = str(input("Digite o Nome do arquivo: "))
-    voltas = int(input("Digite a quantidade de vezes que o teste será executado: "))
+    TesteAda().Inicio()
 
 #    for teste in voltas:
-#        print(f'teste {teste}')
-    for teste in range(voltas):
-        print(f'Teste numero {teste + 1}')
-        TesteAda().ada_teste(pos_az_init, pos_az_end, pos_el_init, pos_el_end,
-                             media_num, frequencia_init, frequencia_end, timer, NomeArquivo, incremento)
+#        print(f'teste {teste}'
 
 #    TesteAda().ada_teste(6.00, 6.00, 0.00, 20, frequencia, 5, -40)
 
