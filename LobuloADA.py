@@ -86,6 +86,9 @@ class TesteAda:
         quantidade_linhas = (quantAZ * quantEL * quantFreq * voltas)
         tempo_por_linhas = (quantAZ * quantEL * quantFreq *
                             tempo_coletas * timer * voltas) / quantidade_linhas
+        retorno = quantAZ + quantEL * 0.5
+        if quantAZ + quantEL > 180:
+            retorno = 60
         print(f'\nO tempo estimado do Teste é de {tempo_total} horas.\n')
         print(f'O teste registrará uma linha a cada {tempo_por_linhas} segundos.\n')
         print(f'O arquivo ficará com {quantidade_linhas} linhas.\n')
@@ -95,6 +98,7 @@ class TesteAda:
                 print(f'Teste numero {teste + 1}')
                 TesteAda().ada_teste(pos_az_init, pos_az_end, pos_el_init, pos_el_end,
                              media_num, frequencia_init, frequencia_end, timer, NomeArquivo, incremento)
+                sleep(retorno)
         else:
             self.Inicio()
 
