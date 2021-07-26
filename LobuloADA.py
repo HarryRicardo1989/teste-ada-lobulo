@@ -25,7 +25,7 @@ class TesteAda:
         self.frequencia_end =  int(frequencia_end *10)
         self.tempo_espera = timer
         self.NomeArquivo = NomeArquivo
-        self.URL.transmit(frequencia_init, "ON")
+        print(self.URL.transmit(frequencia_init, "ON"))
         self.incremento = int(incremento *10)
 
 
@@ -34,8 +34,11 @@ class TesteAda:
             frequencia = freq /10
             self.ada_ctr.set_ada_pos(float(self.pos_az_init), float(self.pos_el_init))
             self.gqrx_ctr.set_controls(ac.set_freq, f'{frequencia}e6')
-            self.URL.transmit(frequencia, "ON")
+            if self.URL.transmit(frequencia, "ON") == "error":
+                print(conexao falhou)
+                return 
             sleep(self.tempo_espera)
+
             for pos_el in range(int(self.pos_el_init), int(self.pos_el_end)+1, 1):
                 for pos_az in range(int(self.pos_az_init), int(self.pos_az_end)+1, 1):
                     print(
@@ -46,7 +49,7 @@ class TesteAda:
                     self.grava_resultado(
                         pos_az, pos_el, frequencia, self.gqrx(media_num))
         print('finalizado')
-        self.URL.transmit(140, "OFF")
+        print(self.URL.transmit(140, "OFF"))
 
     def gqrx(self, media_num):
         signal_power = 0
