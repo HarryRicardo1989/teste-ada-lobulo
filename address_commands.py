@@ -55,3 +55,4 @@ satellites Frequency
 NOAA19 = '137.1e6'
 NOAA18 = '137.9125e6'
 NOAA15 = '137.62e6'
+
