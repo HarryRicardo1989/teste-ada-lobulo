@@ -34,9 +34,7 @@ class TesteAda:
             frequencia = freq /10
             self.ada_ctr.set_ada_pos(float(self.pos_az_init), float(self.pos_el_init))
             self.gqrx_ctr.set_controls(ac.set_freq, f'{frequencia}e6')
-            if self.URL.transmit(frequencia, "ON") == "error":
-                print(conexao falhou)
-                return 
+            self.URL.transmit(frequencia, "ON")
             sleep(self.tempo_espera)
 
             for pos_el in range(int(self.pos_el_init), int(self.pos_el_end)+1, 1):
