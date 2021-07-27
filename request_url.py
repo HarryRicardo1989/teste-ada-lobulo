@@ -5,7 +5,13 @@ from time import sleep
 
 class REQUESTX:
 
-    def transmit(self, freq, status,url):
+    def transmit(self, freq, status):
+
+        if freq > 300:
+            url = "10.8.2.16"
+        else :
+            url = "10.8.2.15"
+
         Loop = True
         urlTX = f'http://{url}/atualiza/freq'
         msg = {'STATUS':f'{status}','FREQ':f'{freq}'}
@@ -25,4 +31,4 @@ class REQUESTX:
         return r.text
 
 
-#print (REQUESTX().transmit(450.0,"ON","10.8.2.16"))
+#print (REQUESTX().transmit(400.0,"OFF"))
