@@ -8,7 +8,7 @@ class REQUESTX:
     def transmit(self, freq, status):
 
         if freq > 300:
-            url = "10.8.2.15"
+            url = "10.8.2.16"
         else :
             url = "10.8.2.16"
 

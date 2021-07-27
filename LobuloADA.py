@@ -27,12 +27,15 @@ class TesteAda:
         self.NomeArquivo = NomeArquivo
         print(self.URL.transmit(frequencia_init, "ON"))
         self.incremento = int(incremento *10)
+        self.ada_ctr.set_ada_pos(float(self.pos_az_init), float(self.pos_el_init))
+        sleep(20)
 
 
         for freq in range(int(self.frequencia_init), int(self.frequencia_end)+1, self.incremento):
             #print(freq, self.frequencia_init, self.frequencia_end)
             frequencia = freq /10
-            self.ada_ctr.set_ada_pos(float(self.pos_az_init), float(self.pos_el_init))
+            self.ada_ctr.set_ada_pos(
+                float(self.pos_az_init), float(self.pos_el_init))
             self.gqrx_ctr.set_controls(ac.set_freq, f'{frequencia}e6')
             self.URL.transmit(frequencia, "ON")
             sleep(self.tempo_espera)
@@ -94,13 +97,19 @@ class TesteAda:
         print(f'O teste registrará uma linha a cada {tempo_por_linhas} segundos.\n')
         print(f'O arquivo ficará com {quantidade_linhas} linhas.\n')
         
-        if input("Digite 'y' para continuar 'n' para alterar os parametros: ") == "y":
+        confirm = input("Digite 'y' para continuar 'n' para alterar os parametros: ")
+
+        if confirm == "y":
             for teste in range(voltas):
                 print(f'Teste numero {teste + 1}')
                 TesteAda().ada_teste(pos_az_init, pos_az_end, pos_el_init, pos_el_end,
                              media_num, frequencia_init, frequencia_end, timer, NomeArquivo, incremento)
                 sleep(retorno)
+        elif confirm == "n":
+            self.Inicio()
         else:
+            print ( "Comando invalido")    
+
             self.Inicio()
 
 if __name__ == '__main__':
